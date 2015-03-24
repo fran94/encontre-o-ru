@@ -1,227 +1,233 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>ENCONTRE O RU</title>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<script src="css/jquery.js" type="text/javascript"></script>
-	<script src="css/ui/jquery-ui.js" type="text/javascript"></script>
-  
-</head>
-<body>
-<div id="All">
-	<div id="Top">
-   		LE RU, <small>em busca do caminho perdido</small>
-   		<span id="Local">VocÍ est· no(a): <b id="Localizacao">Inicio do Jogo</b></span>
-	</div>
-<div id="Started" style="display:none;">
-	<div id="Nav">
-   		<span class="NomeChar">InventÛrio</span>
-   		<div id="SeparadorItem"></div>
-   		<div id="Item"><img src="css/images/declaracao.png" alt=""></div>
-   		<div id="Item"><img src="css/images/galho.png" alt=""></div>
-   		<div id="Item"></div>
-   		<div id="Item"></div>
-   		<div id="Item"></div>
-   		<div id="Item"></div>
-   		<br clear='both'><br clear='both'>
-   		<div id="Item"><img src="css/images/moedas.png" alt=""></div>
-   		<div id="Item"></div>
-   		<div id="Item"></div>
-   		<span class="NomeChar">Luiz</span>   		
-	</div>	
-	<div id="Conversa">
-	
-	<div id="Cont">
-     <div id="NPC">
-     <img src="css/images/n0.png" id="NPCAvatar">
-     <span class="NomeNPC">Guia</span>
-     <p id='TextoNPC'>Ol·, calouro. VocÍ tem pouco tempo. Tome as decisıes corretas!</p>
-     </div>
-	</div>	
-	
-
-	<div id="Me">
-	
-     <div id="AnswerBox">
-        <div id="ContMe">
-          <div id="ChatMe">
-          <img src="css/images/calouro.png" alt="">
-          <span class="NomeMe"></span>
-          <p id='TextoMe'>...</p>
-          </div>
-        </div>     	
-     </div>
-	</div>	
-	</div>
-<br clear="both" />
-
-
-<div id="OptionsChat">
-<!--      <select id="acao" class='OpcaoSelect'>
-        <option value="1">Continuar</option>
-        <option value="2">Ignorar</option>
-     	<option value="3">Responder</option>
-     </select>
- --> 
+    <title>LE RU</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="css/jquery.js" type="text/javascript"></script>
+    <script src="css/ui/jquery-ui.js" type="text/javascript"></script>
+    <script src="css/song/ion.sound.min.js" type="text/javascript"></script>
+    <script src="css/song/jquery.jplayer.js" type="text/javascript"></script>
     
-     <input type="button" id="Opt01" data-id="1" value="Continuar" class="Botoes">
-     <input type="button" id="Opt02" data-id="2" value="AvanÁar" class="Botoes" style="display:none"> 
+    <meta charset="utf-8">
+    <meta name="description" content="Encontre o RU: um game text-based.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-<!-- <div class='Botoes' id='Secao01'>
-<a data-id="1"  id="Opt01">Continuar</a>
+<body>
+     <div id="jplayer_game"></div>
+    <div id="All">
+        <div id="Top">
+            LE RU, <small>em busca de um almo√ßo</small>
+            <span id="Local" style="display:none;">Voc√™ est√° no(a): <b id="Localizacao">Inicio do Jogo</b></span>
+        </div>
+        <div id="Started" style="display:none;">
+            <div id="Conversa">
+                <div id="Cont">
+                    <div id="NPC">
+                        <img src="css/images/n0.png" id="NPCAvatar" alt="NPC">
+                        <span id="NomeNPC">Guia</span>
+                        <p id='TextoNPC'>Ol√°, calouro. Voc√™ tem pouco tempo. Tome as decis√µes corretas!</p>
+                    </div>
+                </div>
+                <div id="Me">
+                    <div id="AnswerBox">
+                        <div id="ContMe">
+                            <div id="ChatMe">
+                                <img src="css/images/calouro.png" alt="">
+                                <span class="NomeMe"></span>
+                                <p id='TextoMe'>...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br style='clear:both;' />
+            <div id="OptionsChat">
+                Selecione uma a√ß√£o: <select id="Action" class='OpcaoSelect' required>
+                    <option value="">Selecione</option>
+                    <option value="1">Continuar</option>
+                </select>
+                <input type="button" id="Opt01" value="Avan√ßar" class="Botoes">
+                    <input type="hidden" id="FalaAtual" value="1">
+                    <input type="hidden" id="LocalAtual" value="0">
+                    <input type="hidden" id="NPCAtual" value="1">
+                    <input type="hidden" id="NovaAtual" value="n">
+            </div>
+        </div>
+        <div id="Startar">
+            <p>Ol√°, Calouro! Voc√™ tem uma dura miss√£o: encontrar o <strong>Restaurante Universit√°rio</strong> da UFPR.</p>
+            <p>Acha f√°cil? Bom, que a sorte te acompanhe.</p>
+            <input type="text" id="nomeCalouro" required placeholder="Digite seu nome aqui, calouro." value='' class="NomeStart">
+            <input type="submit" id="letsGo" value="Iniciar!" class="Opcao">
+        </div>
+        <script type="text/javascript">
+        //A BIBLIOTECA ION SOUND PERMITE REPRODUIZR SONS POR JQUERY.
+        ion.sound({
+    	sounds: [ //CARREGANDO AS .MP3 QUE VAMOS USAR
+        	{name: "water_droplet"}, 
+        	{name: "computer_error"},
+        	{name: "light_bulb_breaking"},
+        	{name: "snap"}
+    	],
+
+    		// main config
+    		path: "css/song/sounds/", // PASTA COM AS MP3
+    		preload: true, // CARREGAR
+    		multiplay: true, //PERMITE SONS SIMULTANEOS
+    		volume: 0.9 // DE 0 A 1.
+		});
+        </script>
+        <script type="text/javascript">
+            $("#letsGo").click(function() { //INICIA O JOGO.
+                if ($("#nomeCalouro").val() == "") { // SE NOME DO CALOURO N√ÉO FOI DIGITADO
+                    ion.sound.play("light_bulb_breaking"); // SOM DE ERRO
+                    alert("Tinha que ser calouro mesmo. DIGITE SEU NOME!"); //ALERT                    
+                    $("#nomeCalouro").effect("highlight", 1000); // REAL√áA O INPUT DO NOME DO CALOURO
+                } else {
+
+					$("#jplayer_game").jPlayer({
+						ready: function() {
+							  	$(this).jPlayer("setMedia", {
+							      	mp3: "css/song/sounds/background.mp3"
+							  	}).jPlayer("play");
+							  	var click = document.ontouchstart === undefined ? 'click' : 'touchstart';
+							  	var kickoff = function() {
+							      	$("#jplayer_game").jPlayer("play");
+							      	document.documentElement.removeEventListener(click, kickoff, true);
+							  	};
+							  	document.documentElement.addEventListener(click, kickoff, true);
+						},
+						swfPath: "/js",
+						loop: true					
+					});	     
+
+                    var calouro = $("#nomeCalouro").val(); // ARMAZENA O NOME NA VAL
+                    $(".NomeMe").html("Calouro " + calouro); // MUDA NO NOME NA BOX DO CALOURO
+
+                    $("#Startar").remove(); // REMOVE A DIV DE INTRO
+                    $("#Started").show('fade', 5000); // INICIA O JOGO COM UM FADE
+                    $("#Local").show();
+
+                    $.getJSON("css/base.json", function(json) { //LE O JSON COM TODAS AS INFORMACOES
+
+                        $("#Opt01").click(function() { // SE CLICOU NA OPCAO 01
+
+                            if ($("#Action").val() == "") { // SE NAO SELECIONOU UMA A√á√ÉO
+                                ion.sound.play("light_bulb_breaking"); // SOM DE ERRO
+                                alert("Tinha que ser calouro mesmo! SELECIONE UMA OP√á√ÉO!"); //ALERT
+                                $("#Action").effect('shake', 1000).effect('highlight'); // CHACOALHA E REAL√áA
+
+                            } else {
+
+                                var atual_npc = parseInt($("#NPCAtual").val()); // ARMAZENA O NPC
+                                var atual_local = parseInt($("#LocalAtual").val()); // ARMAZENA O LOCAL
+                                var atual_fala = parseInt($("#FalaAtual").val()); // ARMAZENA A FALA
+                                var atual_nova = $("#NovaAtual").val(); // ARMAZENA A VARIAVEL QUE DIZ SE VAI MUDAR DE NPC
+
+                                if (atual_nova == 'n') { //SE NAO VAI MUDAR DE NPC
+
+                                    $("#Conversa").hide('fade', 250); // OCULTA A BOX
+                                    $("#Conversa").show('fade', 250); // EXIBE A BOX
+                                    $("#Me").hide('fade',350);  
+                                    $("#Me").show('fade',350); 
+                                    ion.sound.play("water_droplet"); // SOM DE CLIQUE	
+                                                                        
+                                    var acao = json.FALAS[atual_fala].acao; // ARMAZENA A ACAO DA FALA                
+
+                                    $("#NomeNPC").html(json.NPC[atual_npc].nome); // RECUPERA O NOME DO NPC E ALTERA O NOME
+                                    $("#NPCAvatar").attr("src", "css/images/n" + atual_npc + ".png"); // RECUPERA O ID DO NPC E COLOCA O AVATAR
+                                    $("#TextoNPC").html(json.FALAS[atual_fala].fala_npc); // RECUPERA A FALA DO NPC                
+                                    $("#TextoMe").html(json.FALAS[atual_fala].fala_me); // RECUPERA A FALA DO CALOURO  
+
+                                    if (acao == "0") { // SE NAO TEM ACAO NA FALA
+
+                                        $("#NovaAtual").val('n'); // MANTEM
+                                        $("#FalaAtual").val(atual_fala + 1); // AVANCA UMA FALA
+                                        $("#Action").html("<option value=\"\">Selecione</option><option value=\"1\" selected>Continuar</option>");
+                                        ion.sound.play("snap"); // SOM PARA ATUALIZA√á√ÉO
+
+
+                                    } else // SE TEM UMA ACAO
+                                    {
+
+                                        $("#Action").effect('highlight'); // REAL√áA
+                                        $("#Action").html(); // ZERA AS OP√á√ïES
+                                        $("#Action").html("<option value=\"\">Selecione</option>");
+                                        $("#Action").append("<option value=\"1\">" + json.ACOES[acao].botao1 + "</option>");
+
+                                        if (json.ACOES[acao].botao2 != null) { // SE O SEGUNDO BOTAO FOR ATIVADO
+                                            $("#NovaAtual").val('b'); // nao mantem
+                                            $("#Action").append("<option value=\"2\">" + json.ACOES[acao].botao2 + "</option>");
+
+                                        } else // SE SO VAI TER UMA OP√á√ÉO. EX: AVAN√áAR, CONTINUAR, AGUARDAR.
+                                        {
+                                            $("#LocalAtual").val(json.ACOES[acao].local1); // MUDA O INPUT DO LOCAL
+                                            $("#NPCAtual").val(json.ACOES[acao].npcac1); // MUDA A INPUT NPC
+                                            $("#FalaAtual").val(json.ACOES[acao].falas1); // AVANCA A FALA PARA A INDICADA NO JSON
+                                            $("#Localizacao").html(json.LOCAL[json.ACOES[acao].local1]); // MUDA LA NO VOCE ESTA EM
+
+                                        }
+                                    }
+
+
+                                } //if atual nova
+                                else {
+                                	acao = json.FALAS[atual_fala].acao; // RECUPERA ACAO
+                                	ion.sound.play("water_droplet"); // SOM DE CLIQUE	
+                                    if ($("#Action").val() === "1") { //SE O CARA ESCOLHE O 1¬∫
+                                        
+                                        $("#NPCAtual").val(json.ACOES[acao].npcac1); // ATUALIZA O NPC PARA A PROXIMA CENA
+                                        $("#LocalAtual").val(json.ACOES[acao].local1); // ATUALIZA A LOCALIZA√á√ÉO
+                                        $("#FalaAtual").val(json.ACOES[acao].falas1); // ATUALIZA O COD PRA PROX. FALA          
+                                        $("#Action").effect('highlight'); // EFEITO BRILHANTE
+                                        $("#Action").html(); // ZERA AS OP√á√ïES
+                                        $("#Action").html("<option value=\"\">Selecione</option>"); // ADD O BOTAO SELECIONE
+                                        $("#Action").append("<option value=\"1\">" + json.ACOES[acao].botao1 + "</option>");
+                                        $("#NovaAtual").val('n'); // ATUALIZA
+
+
+                                    } else if ($("#Action").val() === "2") {
+                                        
+                                        $("#NPCAtual").val(json.ACOES[acao].npcac2); // ATUALIZA O NPC PARA A PROXIMA CENA
+                                        $("#LocalAtual").val(json.ACOES[acao].local2); // ATUALIZA A LOCALIZA√á√ÉO
+                                        $("#FalaAtual").val(json.ACOES[acao].falas2); // ATUALIZA O COD PRA PROX. FALA          
+                                        $("#Action").effect('highlight'); // EFEITO BRILHANTE
+                                        $("#Action").html(); // ZERA AS OP√á√ïES
+                                        $("#Action").html("<option value=\"\">Selecione</option>");
+                                        $("#Action").append("<option value=\"1\">" + json.ACOES[acao].botao2 + "</option>");
+                                        $("#NovaAtual").val('n'); // ATUALIZA
+
+                                    } else {
+                                        alert("Cara, como voc√™ conseguiu chegar aqui? Tecnicamente, √© impossivel chegar na op√ß√£o " + $("#Action").val())
+                                    }
+                                }
+
+
+                            } //else tem op√ß√£o
+
+
+
+                        }); //acao
+
+                    }); //import
+                }
+
+            }); //letsgo
+        </script>      
 </div>
-<br clear="both" />
-
-<div class='Botoes' id='Secao02'>
-<a data-id="2"  id="Opt02" style="display:none">BOTAO 2</a>     
-</div> -->
-     <b>CONTROL</b>
-     Fala: <input style='width:30px;' type="text" id="FalaAtual" value="1">
-     Local: <input style='width:30px;' type="text" id="LocalAtual" value="0">
-     NPCAtual: <input style='width:30px;' type="text" id="NPCAtual" value="1">
-     NewScene: <input style='width:30px;' type="text" id="NovaAtual" value="nada"> 
-</div>	
+<div id="Validation">
+Esse jogo funciona melhor no <strong>Mozilla Firefox.</strong>
+	<p>
+    <a href="http://jigsaw.w3.org/css-validator/check/referer">
+        <img style="border:0;width:88px;height:31px"
+            src="http://jigsaw.w3.org/css-validator/images/vcss"
+            alt="CSS v√°lido!" /></a>
+    <a href="http://validator.w3.org">
+        <img style="border:0;width:88px;height:31px"
+            src="http://validator.w3.org/images/valid_icons/valid-html40-blue.png"
+            alt="HTML v√°lido!" /></a>
+    </p>    
 </div>
-<div id="Startar">
-<p>Ol·, Calouro! VocÍ tem uma dura miss„o: encontrar o Restaurante Universit·rio da UFPR.</p>
-<p>Acha f·cil? Bom, que a sorte te acompanhe.</p>
-<input type="text" id="nomeCalouro" required placeholder="Digite seu nome aqui, calouro." value='Calourudo' class="NomeStart">
-<input type="submit" id="letsGo" value="Iniciar!" class="Opcao">
-</div>
-
-<script type="text/javascript">
-$("#letsGo").click(function(){  //INICIA O JOGO.
- if ($("#nomeCalouro").val() == "") {  // SE NOME DO CALOURO N√O FOI DIGITADO
- 	alert("Tinha que ser calouro mesmo. DIGITE SEU NOME!");  //ALERT
- 	$("#nomeCalouro").effect("highlight",1000); // REAL«A O INOUT DO NOME DO CALOURO
- }
- else {
-
-
- 	var calouro = $("#nomeCalouro").val(); // ARMAZENA O NOME NA VAL
- 	$(".NomeMe").html("Calouro "+calouro); // MUDA NO NOME NA BOX DO CALOURO
-	
- 	$("#Startar").remove(); // REMOVE A DIV DE INTRO
- 	$("#Started").show('fade',500); // INICIA O JOGO COM UM FADE
-	
- 	$.getJSON("css/base.json", function( json ) { //LE O JSON COM TODAS AS INFORMACOES
-	
-    	$(".Botoes").click(function(){ // SE CLICOU NA OPCAO 01
-	
-    	var atual_npc = parseInt($("#NPCAtual").val()); // ARMAZENA O NPC
-    	var atual_local = parseInt($("#LocalAtual").val()); // ARMAZENA O LOCAL
-    	var atual_fala = parseInt($("#FalaAtual").val()); // ARMAZENA A FALA
-    	var atual_nova = $("#NovaAtual").val(); // ARMAZENA A VARIAVEL QUE DIZ SE VAI MUDAR DE NPC
-	
-     	if (atual_nova == 'nada') { //SE NAO VAI MUDAR DE NPC
-			$("#Conversa").hide('fade',250); // OCULTA A BOX
-			$("#Conversa").show('fade',250); // EXIBE A BOX  	
-        	var acao = json.FALAS[atual_fala].acao; // ARMAZENA A ACAO DA FALA                
-	
-       		$(".NomeNPC").html(json.NPC[atual_npc].nome); // RECUPERA O NOME DO NPC E ALTERA O NOME
-        	$("#NPCAvatar").attr("src","css/images/n"+atual_npc+".png");  // RECUPERA O ID DO NPC E COLOCA O AVATAR
-        	$("#TextoNPC").html(json.FALAS[atual_fala].fala_npc);  // RECUPERA A FALA DO NPC                
-        	$("#TextoMe").html(json.FALAS[atual_fala].fala_me); // RECUPERA A FALA DO CALOURO  
-	        
-        	if (acao == "0") { // SE NAO TEM ACAO NA FALA
-            	$("#NovaAtual").val('nada'); // MANTEM
-            	$("#FalaAtual").val(atual_fala+1); // AVANCA UMA FALA
-            	$("#Opt01").val("Continuar"); // VOLTA O NOME CONTINUAR PADR√O
-        	}
-	
-        	else // SE TEM UMA ACAO
-        	{
-	
-        		
-
-        		$("#Opt01").val(json.ACOES[acao].botao1);  // RECUPERA O NOME DO PRIMEIRO BOTAO E JA ALTERA
-	
-         		if (json.ACOES[acao].botao2 != null) { // SE O SEGUNDO BOTAO FOR ATIVADO
-        			
-
-        			$("#Opt02").show(); // EXIBE, PQ ELE … DISPLAY:NONE POR PADR√O
-        			$("#Opt02").val(json.ACOES[acao].botao2); // DA O NOME PRA ELE
-
-         			 var botaoqclicou = $(this).data("id"); // RECUPERA QUAL O BOT√O ELE CLICOU
-         			 
-         			 if (botaoqclicou === 1) { 
-         			 	// alert("if");
-         			 	$("#NPCAtual").val(json.ACOES[acao].npcac1); // ATUALIZA O NPC PARA A PROXIMA CENA
-         			 	$("#LocalAtual").val(json.ACOES[acao].local1); // ATUALIZA A LOCALIZA«√O
-         			 	$("#FalaAtual").val(json.ACOES[acao].falas1); // ATUALIZA O COD PRA PROX. FALA
-         				// $("#Opt01").val("Continuar"); // VOLTA O NOME CONTINUAR PADR√O		 	
-         				// $("#Opt02").hide(); // OCULTA O SEGUNDO BOTAO         			 	
-         			 }      /// AQUI TA DANDO ZICA.
-         			 else {
-         			 	// alert("else");
-         			 	$("#NPCAtual").val(json.ACOES[acao].npcac2); // ATUALIZA O NPC PARA A PROXIMA CENA
-         			 	$("#LocalAtual").val(json.ACOES[acao].local2); // ATUALIZA A LOCALIZA«√O
-         			 	$("#FalaAtual").val(json.ACOES[acao].falas2); // ATUALIZA O COD PRA PROX. FALA
-         				// $("#Opt01").val("Continuar"); // VOLTA O NOME CONTINUAR PADR√O		 	
-         				// $("#Opt02").hide(); // OCULTA O SEGUNDO BOTAO
-         			 }
-
-
-        		}
-	
-        		else // SE SO VAI TER UMA OP«√O. EX: AVAN«AR, CONTINUAR, AGUARDAR.
-        		{
-        			$("#LocalAtual").val(json.ACOES[acao].local1); // MUDA O INPUT DO LOCAL
-        			$("#NPCAtual").val(json.ACOES[acao].npcac1); // MUDA A INPUT NPC
-        			$("#FalaAtual").val(json.ACOES[acao].falas1); // AVANCA A FALA PARA A INDICADA NO JSON
-        			$("#Localizacao").html(json.LOCAL[json.ACOES[acao].local1]);
-	
-        		}
-	        
-	
-	
-	
-	
-	
-        	}
-	
-	
-     	}
-     	else
-     	{
-      	alert("atual_nova == " + atual_nova);
-    	//   $(".NomeNPC").html(vetNPC[atual_nova]);
-    	//   $("#NPCAtual").val(atual_nova);
-    	//   $("#cena").val('1');
-    	//   $("#All").effect('pulsate'); 
-    	//   $("#newscene").val(0);      
-     	}
-	 
-    	// 	$("#Cont").hide();
-    	// 	$("#Cont").show("fade",200);
-    	// 	$("#TextoNPC").html(vetFalas[npca,sena][0]);
-    	//   $("#Me").effect('highlight',100);
-    	//   $("#TextoMe").html(vetFalas[npca,sena][1]);
-	    	
-    	//   if (vetFalas[npca,sena][2] != '') {
-    	//     var acion = vetFalas[npca,sena][2];
-    	//     var indNPC = vetAcoes[acion][4];
-    	//     var npcb = vetNPC[indNPC];
-	      
-    	//     $("#newscene").val(indNPC);
-    	//     $("#Opt01").val(vetAcoes[acion][0]);
-	        
-    	//     if (vetAcoes[acion][1] != '') { 
-    	//       $("#Opt02").show(); 
-    	//       $("#Opt02").val(vetAcoes[acion][1]); 
-    	//     }
-	       
-      	// }
-	
-	});//acao
- 	});//import
-}
-
-
-
-
-
-});//letsgo
-</script>
 </body>
 </html>

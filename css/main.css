@@ -1,163 +1,64 @@
-body {
-	/*max-width: 1000px;*/
-	font-family: 'Open Sans',sans-serif;
-	background: #DDCCA5 url("images/bg.jpg");
+@import url(http://fonts.googleapis.com/css?family=Open+Sans|Lobster); 
+
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
 }
 
-/**/
+body                { font-family: 'Open Sans',sans-serif; background: #DDCCA5 url(images/bg.jpg); animation: animatedBackground 20s linear infinite; }
+span#Local          { float: right; font-size: 10px; font-family: arial; }
+div#All             { width: 100%; margin: 3px; }
+div#Top             { text-align: left; border-bottom: 1px dashed #888; font-family: Lobster,arial; font-size: 70px; margin: 3px; }
+div#Me              { text-align: left; float: left; margin: 3px; }
+div#Nav             { float: right; border: 1px solid #444; background: transparent url(images/itens.png) no-repeat; width: 180px; height: 310px; text-align: center; margin: 10px; padding: 15px 0 0; }
+div#SeparadorItem   { margin: 35px 0 0; }
+div.Item            { width: 60px; height: 60px; float: left; }
+span.NomeChar       { color: #5F4C0B; font-family: Georgia,arial; font-size: 22px; }
+div#Cont            { border: 0 solid #444; background: transparent url(images/text.png) no-repeat; height: 110px; width: 405px; text-align: center; margin: 8px; padding: 15px 0 0; }
+div#NPC             { text-align: left; color: #fff; font-family: Georgia,arial; font-size: 13px; margin: 8px 0 0 38px; }
+div#NPC img         { float: left; width: 70px; height: 70px; }
+div#NPC p           { width: 240px; word-wrap: break-word; text-align: justify; padding: 0 0 0 80px; }
+span#NomeNPC        { color: #fff; text-shadow: 1px 1px 1px rgba(35,35,35,0.62); font-size: 20px; margin-left: 10px; }
+input,select        { font-family: 'Open Sans',sans-serif; }
+select#Action       { border-radius: 5px; }
+input.Botoes,.Opcao { border: 0; background: transparent url(images/option.png) no-repeat; width: 165px; height: 52px; color: #FFF; }
+select.OpcaoSelect  { border: 1px solid #5F4C0B; width: 150px; height: 40px; color: #5F4C0B; }
+input.NomeStart     { border: 1px solid #5F4C0B; width: 400px; height: 40px; color: #5F4C0B; text-align: center; }
+div#ContMe          { border: 0px solid #444; background: transparent url(images/text_me.png) no-repeat; height: 110px; width: 405px; text-align: center; margin: 8px; padding: 15px 0 0; }
+div#ChatMe          { text-align: left; color: #fff; font-family: Georgia,arial; font-size: 13px; margin: 8px 43px 0 38px; }
+div#ChatMe img      { float: right; width: 70px; height: 70px; }
+div#ChatMe p        { width: 240px; word-wrap: break-word; text-align: justify; padding: 0 80px 0 0; }
+span.NomeMe         { color: #fff; text-shadow: 1px 1px 1px rgba(35,35,35,0.62); font-size: 20px; margin-right: 10px; }
+div#Validation      { text-align: right; padding: 3px; border-top: 1px solid #eaeaea; margin-top: 30px; font-size: 10px; color:#777; }
 
-span#Local{
-	float:right;
-	font-size: 10px;
-	font-family: arial;
+
+.demo-container {
+	border: 1px solid #009BE3;
+	padding:0 20px;
+	font-family: "Myriad Pro Regular","Trebuchet MS";
 }
 
-div#All {
+.demo-container a, .demo-container a:link, .demo-container a:visited, .demo-container a:hover, .demo-container a:focus, .demo-container a:active {
+	color: #009BE3;
+}
+
+.demo-container ul {
+	list-style-type:none;
+	padding:0;
+	margin:1em 0;
 	width:100%;
-	margin:3px;
-}	
-
-div#Top {
-	text-align: left;	
-	border-bottom:1px dashed #888;
-	margin:3px;
-	font-family: 'Badaboom BB',arial;
-	font-size: 70px;
+	overflow:hidden;
 }
 
-div#Me {
-	text-align: left;	
-	margin:3px;
+.demo-container ul span {
+	color: #A0A600;
+}
+
+.demo-container li {
 	float:left;
-	/*clear:both;*/
+	margin-right:1em;
 }
 
-div#Nav {
-  	float:right;
-  	border:1px solid #444;
-	margin:10px;
-	padding: 15px 0px 0 0px;
-	text-align: right;
-    background: transparent url("images/itens.png") no-repeat;
-    width:180px;
-    height:310px;
-    text-align: center;
-}
- div#SeparadorItem {
- 	margin:35px 0 0 0;
- }
-
-
-div#Item {
-	width:60px;
-	height:60px;
-	float:left;
-}
-
-span.NomeChar {
-	color:#5F4C0B;
-	font-family: 'Georgia',arial;
-	font-size: 22px;
-}
-
-div#Cont {
-  	border:0px solid #444;
-	margin:8px;
-	padding: 15px 0px 0 0px;
-	text-align: right;
-    background: transparent url("images/text.png") no-repeat;
-    height:110px;
-    width:405px;
-    text-align: center;
-}	
-
-
-div#NPC {	
-	margin:8px 0 0 38px;
-	text-align: left;
-	color:#fff;
-	font-family: 'Georgia',arial;
-	font-size:13px;
-}
-
-div#NPC img {
-	float:left;
-	width:70px;
-	height:70px;
-}
-
-div#NPC p {
-	padding:0 0 0 80px;
-	width:240px;
-	word-wrap: break-word;
-	text-align: justify;
-}
-
-span.NomeNPC {
-	color:#fff;
-	text-shadow: 1px 1px 1px rgba(35, 35, 35, 0.62);
-	font-size: 20px;
-	margin-left:10px;
-}
-
-input.Botoes, .Opcao {
-	border:0px;
-	background: transparent url("images/option.png") no-repeat;
-	width:165px;
-	height:52px;
-	color:#FFF;
-}
-
-select.OpcaoSelect {
-	border:1px solid #5F4C0B;
-	width:150px;
-	height:40px;
-	color:#5F4C0B;
-}
-
-input.NomeStart {
-	border:1px solid #5F4C0B;
-	width:400px;
-	height:40px;
-	color:#5F4C0B;
-	text-align: center;
-}
-
-div#ContMe {
-  	border:0px solid #444;
-	margin:8px;
-	padding: 15px 0px 0 0px;
-	text-align: right;
-    background: transparent url("images/text_me.png") no-repeat;
-    height:110px;
-    width:405px;
-    text-align: center;
-}
-
-div#ChatMe {	
-	margin:8px 43px 0 38px;
-	text-align: left;
-	color:#fff;
-	font-family: 'Georgia',arial;
-	font-size:13px;
-}
-
-div#ChatMe img {
-	float:right;
-	width:70px;
-	height:70px;
-}
-
-div#ChatMe p {
-	padding:0 80 0 0px;
-	width:240px;
-	word-wrap: break-word;
-	text-align: justify;
-}
-
-span.NomeMe {
-	color:#fff;
-	text-shadow: 1px 1px 1px rgba(35, 35, 35, 0.62);
-	font-size: 20px;
-	margin-right:10px;
+.demo-container p span.track-name {
+	color: #CC0090;
 }

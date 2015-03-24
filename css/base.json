@@ -112,13 +112,23 @@
     "9": {
       "fala_npc": "...",
       "fala_me": "...",
-      "acao": "2"
+      "acao": "0"
     },
     "10": {
-      "fala_npc": "E ai, quer jogar ping-pong?",
-      "fala_me": "Na verdade preciso ir ao RU. Mas...",
+      "fala_npc": "...",
+      "fala_me": "Deixe quieto.",
       "acao": "3"
-    }
+    },
+    "11": {
+      "fala_npc": "E ai, quer jogar ping-pong?",
+      "fala_me": "Na verdade preciso ir ao RU. ",
+      "acao": "0"
+    },
+    "12": {
+      "fala_npc": "Depois você vai. Joga ai!",
+      "fala_me": "...",
+      "acao": "4"
+    }    
   },
   "ACOES": {
     "1": {
@@ -142,6 +152,16 @@
       "falas2": "10"
     },
     "3": {
+      "botao1": "Ir embora",
+      "local1": "3",
+      "npcac1": "3",
+      "falas1": "11",
+      "botao2": null,
+      "local2": null,
+      "npcac2": null,
+      "falas2": null
+    },    
+    "4": {
       "botao1": "Aceitar",
       "local1": "3",
       "npcac1": "3",
